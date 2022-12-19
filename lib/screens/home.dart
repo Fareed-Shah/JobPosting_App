@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Current Openings'),
+          actions: const [Icon(Icons.search)],
         ),
         body: items.isNotEmpty
             ? ListView.builder(itemCount: items.length, itemBuilder: App_card)

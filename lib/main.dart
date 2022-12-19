@@ -2,7 +2,7 @@ import 'package:app_functionality/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  // To hide error screen on Window
+  // To hide error screen on Production Mode
   ErrorWidget.builder = (FlutterErrorDetails details) {
     bool isdebug = false;
     assert(() {
