@@ -43,13 +43,18 @@ class _HomeState extends State<Home> {
   Widget App_card(BuildContext context, int index) => Card(
         margin: const EdgeInsets.all(10),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
               Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(items[index].title),
+                    Text(
+                      items[index].title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.00),
+                    ),
                     Text(items[index].descrip),
                   ],
                 ),
