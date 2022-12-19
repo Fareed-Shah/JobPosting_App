@@ -18,7 +18,14 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Current Openings'),
-          actions: const [Icon(Icons.search)],
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showSearch(
+                      context: context, delegate: CustomSearchDelegate());
+                },
+                icon: const Icon(Icons.search))
+          ],
         ),
         body: items.isNotEmpty
             ? ListView.builder(itemCount: items.length, itemBuilder: App_card)
@@ -75,4 +82,64 @@ class _HomeState extends State<Home> {
           ),
         ),
       );
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  // List<String> jobs_op = ['Flutter', 'React', 'Android', 'IOS', 'Java'];
+  List<JobPosting> items = [];
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(Icons.clear)),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> MatchQuery = [];
+    for (var job in items) {
+      if (job.toString().toLowerCase().contains(query.toLowerCase())) {
+        MatchQuery.add(job.title);
+      }
+    }
+    return ListView.builder(
+        itemCount: MatchQuery.length,
+        itemBuilder: ((context, index) {
+          var result = MatchQuery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        }));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> MatchQuery = [];
+    for (var job in items) {
+      if (job.toString().toLowerCase().contains(query.toLowerCase())) {
+        MatchQuery.add(job.title);
+      }
+    }
+    return ListView.builder(
+        itemCount: MatchQuery.length,
+        itemBuilder: ((context, index) {
+          var result = MatchQuery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        }));
+  }
 }
