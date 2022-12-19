@@ -8,7 +8,8 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-  TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _titleEditingController = TextEditingController();
+  TextEditingController _descEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,12 @@ class _FormScreenState extends State<FormScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _textEditingController,
+              controller: _titleEditingController,
               decoration: const InputDecoration(hintText: "Title"),
+            ),
+            TextField(
+              controller: _descEditingController,
+              decoration: const InputDecoration(hintText: "Description"),
             ),
             const Spacer(),
             ElevatedButton(
@@ -38,6 +43,14 @@ class _FormScreenState extends State<FormScreen> {
   }
 
   void onSave(BuildContext context) {
-    Navigator.pop(context, _textEditingController.text);
+    Navigator.pop(context,
+        JobPosting(_titleEditingController.text, _descEditingController.text));
   }
+}
+
+class JobPosting {
+  final String title;
+  final String descrip;
+
+  JobPosting(this.title, this.descrip);
 }

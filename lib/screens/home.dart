@@ -1,4 +1,3 @@
-import 'package:app_functionality/custom_widgets/app_card.dart';
 import 'package:app_functionality/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> items = [];
+  List<JobPosting> items = [];
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +19,18 @@ class _HomeState extends State<Home> {
           centerTitle: true,
           title: const Text('Current Openings'),
         ),
-        body: ListView(
-          children: items.map((text) => App_card(text: text)).toList(),
-        ),
+        body: items.isNotEmpty
+            ? ListView.builder(itemCount: items.length, itemBuilder: App_card)
+            : const Center(
+                child: Text(
+                  "No Job's Available",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context)
-                .push<String>(
+                .push<JobPosting>(
                     MaterialPageRoute(builder: (_) => const FormScreen()))
                 .then((value) => setState(() {
                       items.add(value!);
@@ -35,4 +39,34 @@ class _HomeState extends State<Home> {
           child: const Icon(Icons.add),
         ));
   }
+
+  Widget App_card(BuildContext context, int index) => Card(
+        margin: const EdgeInsets.all(10),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(items[index].title),
+                    Text(items[index].descrip),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    items.removeAt(index);
+                  });
+                },
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              )
+            ],
+          ),
+        ),
+      );
 }
