@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        // backgroundColor: Colors.black,
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Current Openings'),
@@ -32,8 +32,7 @@ class _HomeState extends State<Home> {
             : const Center(
                 child: Text(
                   "No Job's Available",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
         floatingActionButton: FloatingActionButton(
