@@ -1,4 +1,5 @@
 import 'package:app_functionality/screens/home.dart';
+import 'package:app_functionality/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);
@@ -42,7 +43,11 @@ class _FormScreenState extends State<FormScreen> {
     );
   }
 
-  void onSave(BuildContext context) {
+  void onSave(BuildContext context) async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setString('Title', _titleEditingController.text);
+    sp.setString('descrip', _descEditingController.text);
+
     Navigator.pop(context,
         JobPosting(_titleEditingController.text, _descEditingController.text));
   }

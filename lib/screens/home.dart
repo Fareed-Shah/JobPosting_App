@@ -1,6 +1,7 @@
 import 'package:app_functionality/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -10,6 +11,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<JobPosting> items = [];
+  
 
   @override
   Widget build(BuildContext context) {
