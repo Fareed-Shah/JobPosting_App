@@ -1,7 +1,6 @@
 import 'package:app_functionality/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -11,12 +10,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<JobPosting> items = [];
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Current Openings'),
@@ -34,7 +32,8 @@ class _HomeState extends State<Home> {
             : const Center(
                 child: Text(
                   "No Job's Available",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
         floatingActionButton: FloatingActionButton(
@@ -63,12 +62,26 @@ class _HomeState extends State<Home> {
                     Text(
                       items[index].title,
                       style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.00),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.00,
+                      ),
                     ),
                     Text(items[index].descrip),
                   ],
                 ),
               ),
+              // Edit
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const FormScreen()));
+                },
+                child: const Icon(
+                  Icons.edit,
+                  color: Colors.red,
+                ),
+              ),
+              // Delete
               GestureDetector(
                 onTap: () {
                   setState(() {
